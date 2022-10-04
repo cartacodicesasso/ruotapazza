@@ -18,7 +18,7 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - name: Format
-        run: dotnet format -v d --verify-no-changes
+        run: dotnet format --verify-no-changes -v n
 
   check:
     name: Check
@@ -36,4 +36,4 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore
       - name: Test
-        run: dotnet test --no-restore -v d
+        run: dotnet test --no-restore -v n
