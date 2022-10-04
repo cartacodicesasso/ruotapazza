@@ -1,3 +1,5 @@
+using static ApiExceptionType;
+
 public class DeleteMe_Tests
 {
     [Fact]
@@ -10,7 +12,7 @@ public class DeleteMe_Tests
         Assert.True(result.IsLeft);
 
         result.Match(
-            Left: Assert.IsType<ArgumentNullException>,
+            Left: l => Assert.Equal(DeleteMeError.ToApiException(), l),
             Right: _ => throw new Exception()
         );
     }
