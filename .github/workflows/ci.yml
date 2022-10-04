@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  fmt:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: checkout
+      - uses: actions/setup-dotnet@v3
+        name: Setup .NET Core
+        with:
+          dotnet-version: '6.0.x'
+      - name: Format
+        run: dotnet format -v d --verify-no-changes
+
+  check:
+    name: Check
+    needs: fmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: checkout
+      - uses: actions/setup-dotnet@v3
+        name: Setup .NET Core
+        with:
+          dotnet-version: '6.0.x'
+      - name: Install deps
+        run: dotnet restore
+      - name: Build
+        run: dotnet build -c Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore -v d
