@@ -1,0 +1,9 @@
+{
+  "editor.defaultFormatter": "ms-dotnettools.csharp",
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": false,
+  "editor.tabSize": 4,
+  "editor.autoIndent": "advanced",
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false
+}
