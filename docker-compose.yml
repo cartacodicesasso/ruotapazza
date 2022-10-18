@@ -1,9 +1,0 @@
-version: "3.9"
-services:
-  backend:
-    image: ruotapazza_be
-    container_name: ruotapazza_be
-    build: ./RuotaPazza.Backend
-    # environment:
-    ports:
-      - "5000:80"
