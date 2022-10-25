@@ -12,5 +12,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapPost<IEnumerable<int?>, IEnumerable<string>>("/", DeleteMe.MapToString);
+app.MapGet("/v", () => "v0.0.4");
 
 app.Run();
