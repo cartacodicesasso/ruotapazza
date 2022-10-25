@@ -1,6 +1,5 @@
 # Create images
-docker buildx build --platform linux/amd64 --no-cache -t ruotapazza_be.img -f ./docker/Backend.dockerfile .
-# docker buildx build --platform linux/amd64,linux/arm64 --no-cache -t ruotapazza_be.img -f ./docker/Backend.dockerfile .
+./build.sh --amd
 
 # Export images
 mkdir -p ./dist
