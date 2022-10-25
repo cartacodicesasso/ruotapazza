@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  backend:
+    image: ruotapazza_be.img
+    container_name: ruotapazza_be.cnt
+    # build:
+    #   context: ..
+    #   dockerfile: ./docker/Backend.dockerfile
+    # environment:
+    ports:
+      - "6000:80"
