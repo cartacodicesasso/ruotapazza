@@ -1,5 +1,5 @@
 # Create images
-./scripts/build.sh --amd
+bash ./scripts/build.sh --amd
 
 # Export images
 mkdir -p ./dist
