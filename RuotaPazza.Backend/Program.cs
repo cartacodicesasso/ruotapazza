@@ -1,3 +1,5 @@
+using LanguageExt;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -12,6 +14,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapPost<IEnumerable<int?>, IEnumerable<string>>("/", DeleteMe.MapToString);
-app.MapGet("/v", () => "v0.0.4");
+app.MapPost<object, Unit>("/paypal", PayPal.HandleEvent);
+
+app.MapGet("/v", () => "v0.0.5");
 
 app.Run();
