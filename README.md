@@ -1,5 +1,9 @@
 # Ruota pazza
 
+## Rules
+
+- Every time you add a new `ApiExceptionType`, go to `WebApplicationExtensions.cs#ToHttpResult` and fix the switch.
+
 ## DB
 
 - donation: ID, email
