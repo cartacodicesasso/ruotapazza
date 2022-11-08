@@ -1,6 +1,7 @@
 public enum ApiExceptionType
 {
-    DeleteMeError
+    DeleteMeError,
+    PayPalCaptureParseError,
 }
 
 public record ApiException(ApiExceptionType Type);
