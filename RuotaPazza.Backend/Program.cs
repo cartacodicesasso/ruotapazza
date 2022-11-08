@@ -16,6 +16,6 @@ if (app.Environment.IsDevelopment())
 app.MapPost<IEnumerable<int?>, IEnumerable<string>>("/", DeleteMe.MapToString);
 app.MapPost<object, Unit>("/paypal", PayPal.HandleEvent);
 
-app.MapGet("/v", () => "v0.0.4");
+app.MapGet("/v", () => "v0.0.5");
 
 app.Run();
