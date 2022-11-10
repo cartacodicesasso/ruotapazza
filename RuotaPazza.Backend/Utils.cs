@@ -4,9 +4,20 @@ using static ApiExceptionType;
 
 public static class Utils
 {
-    public static Either<ApiException, PayPalCapture> ToCapture(this JsonDocument document)
+    public static Either<E, A> TryCatch<E, A>(Func<A> func, Func<Exception, E> onError)
     {
         try
+        {
+            return func();
+        }
+        catch (Exception e)
+        {
+            return Either<E, A>.Left(onError(e));
+        }
+    }
+
+    public static Either<ApiException, PayPalCapture> ToCapture(this JsonDocument document) =>
+        TryCatch(() =>
         {
             var resource = document.RootElement.GetProperty("resource");
             var amount = resource.GetProperty("amount");
@@ -19,10 +30,5 @@ public static class Utils
             };
 
             return capture;
-        }
-        catch
-        {
-            return Either<ApiException, PayPalCapture>.Left(PayPalCaptureParseError.ToApiException());
-        }
-    }
+        }, (_) => PayPalCaptureParseError.ToApiException());
 }
