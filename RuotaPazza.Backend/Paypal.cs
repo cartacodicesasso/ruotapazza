@@ -10,7 +10,6 @@ public static class PayPal
             {
                 /*
                 TODO:
-                - TEST
                 - Get donor e-mail address from PayPal
                 - Save shit to DB
                 */

@@ -30,5 +30,11 @@ public static class Utils
             };
 
             return capture;
-        }, (_) => PayPalCaptureParseError.ToApiException());
+        }, (_) =>
+        {
+            Console.WriteLine("Wrong capture payload.");
+            Console.WriteLine(JsonSerializer.Serialize(document));
+
+            return PayPalCaptureParseError.ToApiException();
+        });
 }
