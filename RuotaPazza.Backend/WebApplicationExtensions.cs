@@ -8,7 +8,11 @@ public static class WebApplicationExtensions
 
     static IResult ToHttpResult<TOut>(this Either<ApiException, TOut> either) =>
         either.Match(
-            Left: _ => Results.StatusCode(500),
+            Left: (exception) => exception.Type switch
+            {
+                ApiExceptionType.PayPalCaptureParseError => Results.BadRequest(),
+                _ => Results.StatusCode(500)
+            },
             Right: r => Results.Ok(r)
         );
 }
