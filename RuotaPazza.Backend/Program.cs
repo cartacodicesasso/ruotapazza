@@ -7,13 +7,13 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseSwagger();
-  app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.MapGet("/v", () => "v0.0.6");
+app.MapGet("/v", () => "v0.0.7");
 
 app.Run();
