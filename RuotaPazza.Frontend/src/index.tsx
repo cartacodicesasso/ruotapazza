@@ -39,6 +39,17 @@ PayPal.Donation.Button({
     alt: "Donate with PayPal button",
   },
   onComplete(params) {
-    console.log(params.tx);
+    // TODO: remove this
+    console.log("Posting donation", {
+      endpoint: "/donations",
+      options: { method: "POST", body: { transactionId: params.tx } },
+    });
+
+    fetch("/donations", {
+      method: "POST",
+      body: JSON.stringify({ transactionId: params.tx }),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response));
   },
 }).render("#paypal-donate-button-container");
