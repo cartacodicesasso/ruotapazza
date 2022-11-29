@@ -11,9 +11,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.Map("/api", builder =>
+{
+    builder.UseRouting();
+    builder.UseEndpoints(api =>
+    {
+        api.MapPost("/donations", () => @"{ ""success"": true }");
+        api.MapGet("/v", () => "v0.0.8");
+    });
+});
+
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
-app.MapGet("/v", () => "v0.0.7");
 
 app.Run();

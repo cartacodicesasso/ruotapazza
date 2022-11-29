@@ -41,11 +41,11 @@ PayPal.Donation.Button({
   onComplete(params) {
     // TODO: remove this
     console.log("Posting donation", {
-      endpoint: "/donations",
+      endpoint: "/api/donations",
       options: { method: "POST", body: { transactionId: params.tx } },
     });
 
-    fetch("/donations", {
+    fetch("/api/donations", {
       method: "POST",
       body: JSON.stringify({ transactionId: params.tx }),
     })
