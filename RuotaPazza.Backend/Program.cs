@@ -1,6 +1,3 @@
-using System.Text.Json;
-using LanguageExt;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -14,9 +11,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost<IEnumerable<int?>, IEnumerable<string>>("/", DeleteMe.MapToString);
-app.MapPost<JsonDocument, Unit>("/paypal", PayPal.HandleEvent);
+app.Map("/api", builder =>
+{
+    builder.UseRouting();
+    builder.UseEndpoints(api =>
+    {
+        api.MapPost("/donations", () => @"{ ""success"": true }");
+        api.MapGet("/v", () => "v0.0.8");
+    });
+});
 
-app.MapGet("/v", () => "v0.0.6");
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.Run();
