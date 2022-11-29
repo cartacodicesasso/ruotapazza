@@ -1,16 +1,18 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+FROM node:16 AS build-frontend
 WORKDIR /app
+COPY ./RuotaPazza.Frontend .
+RUN npm i
+RUN npm run build
 
-# Copy everything
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-backend
+WORKDIR /app
 COPY ./RuotaPazza.Backend .
-# Restore as distinct layers
 RUN dotnet restore
-# Build and publish a release
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build-backend /app/out .
+COPY --from=build-frontend /app/build ./wwwroot
 ENV DOTNET_EnableDiagnostics=0
 ENTRYPOINT ["dotnet", "RuotaPazza.Backend.dll"]
